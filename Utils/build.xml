@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="utils" default="jar">
+	<property name="jar.version" value="0.1.0" />
+	<property name="jar.name" value="bc-utils-${jar.version}" />
+	
+	<property name="dir.src" value="src" />
+	<property name="dir.libs" value="lib" />
+	<property name="dir.classes" value="classes" />
+	<property name="dir.out" value="out" />
+
+	<path id="libs">
+		<fileset dir="${dir.libs}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="compile">
+		<mkdir dir="${dir.classes}" />
+
+		<javac destdir="${dir.classes}" debug="true" encoding="UTF-8">
+			<src path="${dir.src}" />
+			<classpath refid="libs" />
+		</javac>
+	</target>
+	
+	<target name="jar" depends="compile">
+		<mkdir dir="${dir.out}"/>
+		
+		<jar destfile="${dir.out}/${jar.name}.jar">
+			<fileset dir="${dir.classes}">
+				<include name="**/*.class"/>
+			</fileset>
+		</jar>
+	</target>
+
+	<target name="clean">
+		<delete dir="${dir.classes}"/>
+		<delete dir="${dir.out}"/>
+	</target>
+	
+</project>
