@@ -3,7 +3,7 @@
 <project name="utils" default="jar">
 	<property name="jar.version" value="0.1.0" />
 	<property name="jar.name" value="bc-utils-${jar.version}" />
-	
+
 	<property name="dir.src" value="src" />
 	<property name="dir.libs" value="lib" />
 	<property name="dir.classes" value="classes" />
@@ -23,20 +23,19 @@
 			<classpath refid="libs" />
 		</javac>
 	</target>
-	
+
 	<target name="jar" depends="compile">
-		<mkdir dir="${dir.out}"/>
-		
+		<mkdir dir="${dir.out}" />
+
 		<jar destfile="${dir.out}/${jar.name}.jar">
-			<fileset dir="${dir.classes}">
-				<include name="**/*.class"/>
-			</fileset>
+			<fileset dir="${dir.classes}" includes="**/*.class" />
+			<zipgroupfileset dir="${dir.libs}" includes="**/*.jar" />
 		</jar>
 	</target>
 
 	<target name="clean">
-		<delete dir="${dir.classes}"/>
-		<delete dir="${dir.out}"/>
+		<delete dir="${dir.classes}" />
+		<delete dir="${dir.out}" />
 	</target>
-	
+
 </project>
